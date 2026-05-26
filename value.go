@@ -4,8 +4,6 @@ package null
 
 import (
 	"database/sql"
-	"encoding/json"
-	"fmt"
 )
 
 // Value represents a value that may be null.
@@ -14,70 +12,27 @@ type Value[T any] struct {
 }
 
 // NewValue creates a new Value.
-func NewValue[T any](t T, valid bool) Value[T] {
-	return Value[T]{
-		Null: sql.Null[T]{
-			V:     t,
-			Valid: valid,
-		},
-	}
-}
+func NewValue[T any](t T, valid bool) Value[T] { _ = "STUB: not implemented"; return nil }
 
 // ValueFrom creates a new Value that will always be valid.
-func ValueFrom[T any](t T) Value[T] {
-	return NewValue(t, true)
-}
+func ValueFrom[T any](t T) Value[T] { _ = "STUB: not implemented"; return nil }
 
 // ValueFromPtr creates a new Value that will be null if t is nil.
-func ValueFromPtr[T any](t *T) Value[T] {
-	if t == nil {
-		var zero T
-		return NewValue(zero, false)
-	}
-	return NewValue(*t, true)
-}
+func ValueFromPtr[T any](t *T) Value[T] { _ = "STUB: not implemented"; return nil }
 
 // ValueOrZero returns the inner value if valid, otherwise zero.
-func (t Value[T]) ValueOrZero() T {
-	if !t.Valid {
-		var zero T
-		return zero
-	}
-	return t.V
-}
+func (t Value[T]) ValueOrZero() T { _ = "STUB: not implemented"; return *new(T) }
 
 // ValueOr returns the inner value if valid, otherwise v.
-func (t Value[T]) ValueOr(v T) T {
-	if !t.Valid {
-		return v
-	}
-	return t.V
-}
+func (t Value[T]) ValueOr(v T) T { _ = "STUB: not implemented"; return *new(T) }
 
 // MarshalJSON implements json.Marshaler.
 // It will encode null if this value is null.
-func (t Value[T]) MarshalJSON() ([]byte, error) {
-	if !t.Valid {
-		return []byte("null"), nil
-	}
-	return json.Marshal(t.V)
-}
+func (t Value[T]) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // UnmarshalJSON implements json.Unmarshaler.
 // It supports string and null input.
-func (t *Value[T]) UnmarshalJSON(data []byte) error {
-	if len(data) > 0 && data[0] == 'n' {
-		t.Valid = false
-		return nil
-	}
-
-	if err := json.Unmarshal(data, &t.V); err != nil {
-		return fmt.Errorf("null: couldn't unmarshal JSON: %w", err)
-	}
-
-	t.Valid = true
-	return nil
-}
+func (t *Value[T]) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
 /*
 // MarshalText implements encoding.TextMarshaler.
@@ -127,28 +82,20 @@ try:
 */
 
 // SetValid changes this Value's value and sets it to be non-null.
-func (t *Value[T]) SetValid(v T) {
-	t.V = v
-	t.Valid = true
-}
+func (t *Value[T]) SetValid(v T) { _ = "STUB: not implemented"; return }
 
 // Ptr returns a pointer to this Value's value, or a nil pointer if this Value is null.
-func (t Value[T]) Ptr() *T {
-	if !t.Valid {
-		return nil
-	}
-	return &t.V
-}
+func (t Value[T]) Ptr() *T { _ = "STUB: not implemented"; return nil }
 
 // IsZero returns true for invalid Values, hopefully for future omitempty support.
 // A non-null Value with a zero value will not be considered zero.
 func (t Value[T]) IsZero() bool {
-	return !t.Valid
-}
+	_ = "STUB: not implemented"
 
-/*
-// Equal returns true if both Value objects encode the same value or are both null.
-func (t Value[T]) Equal(other Value[T]) bool {
-	return t.Valid == other.Valid && (t.V == other.V)
+	/*
+	   // Equal returns true if both Value objects encode the same value or are both null.
+	   func (t Value[T]) Equal(other Value[T]) bool {
+	   	return t.Valid == other.Valid && (t.V == other.V)
+	   }
+	*/return false
 }
-*/

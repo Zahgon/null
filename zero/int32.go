@@ -2,9 +2,6 @@ package zero
 
 import (
 	"database/sql"
-	"strconv"
-
-	"github.com/guregu/null/v6/internal"
 )
 
 // Int32 is a nullable int32.
@@ -15,113 +12,48 @@ type Int32 struct {
 }
 
 // NewInt32 creates a new Int32
-func NewInt32(i int32, valid bool) Int32 {
-	return Int32{
-		NullInt32: sql.NullInt32{
-			Int32: i,
-			Valid: valid,
-		},
-	}
-}
+func NewInt32(i int32, valid bool) Int32 { _ = "STUB: not implemented"; return *new(Int32) }
 
 // Int32From creates a new Int32 that will be null if zero.
-func Int32From(i int32) Int32 {
-	return NewInt32(i, i != 0)
-}
+func Int32From(i int32) Int32 { _ = "STUB: not implemented"; return *new(Int32) }
 
 // Int32FromPtr creates a new Int32 that be null if i is nil.
-func Int32FromPtr(i *int32) Int32 {
-	if i == nil {
-		return NewInt32(0, false)
-	}
-	n := NewInt32(*i, true)
-	return n
-}
+func Int32FromPtr(i *int32) Int32 { _ = "STUB: not implemented"; return *new(Int32) }
 
 // ValueOrZero returns the inner value if valid, otherwise zero.
-func (i Int32) ValueOrZero() int32 {
-	if !i.Valid {
-		return 0
-	}
-	return i.Int32
-}
+func (i Int32) ValueOrZero() int32 { _ = "STUB: not implemented"; return 0 }
 
 // ValueOr returns the inner value if valid, otherwise v.
-func (i Int32) ValueOr(v int32) int32 {
-	if !i.Valid {
-		return v
-	}
-	return i.Int32
-}
+func (i Int32) ValueOr(v int32) int32 { _ = "STUB: not implemented"; return 0 }
 
 // UnmarshalJSON implements json.Unmarshaler.
 // It supports number and null input.
 // 0 will be considered a null Int32.
-func (i *Int32) UnmarshalJSON(data []byte) error {
-	err := internal.UnmarshalIntJSON(data, &i.Int32, &i.Valid, 32, strconv.ParseInt)
-	if err != nil {
-		return err
-	}
-	i.Valid = i.Int32 != 0
-	return nil
-}
+func (i *Int32) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
 // It will unmarshal to a null Int32 if the input is a blank, or zero.
 // It will return an error if the input is not an integer, blank, or "null".
-func (i *Int32) UnmarshalText(text []byte) error {
-	err := internal.UnmarshalIntText(text, &i.Int32, &i.Valid, 32, strconv.ParseInt)
-	if err != nil {
-		return err
-	}
-	i.Valid = i.Int32 != 0
-	return nil
-}
+func (i *Int32) UnmarshalText(text []byte) error { _ = "STUB: not implemented"; return nil }
 
 // MarshalJSON implements json.Marshaler.
 // It will encode 0 if this Int32 is null.
-func (i Int32) MarshalJSON() ([]byte, error) {
-	n := i.Int32
-	if !i.Valid {
-		n = 0
-	}
-	return []byte(strconv.FormatInt(int64(n), 10)), nil
-}
+func (i Int32) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // MarshalText implements encoding.TextMarshaler.
 // It will encode a zero if this Int32 is null.
-func (i Int32) MarshalText() ([]byte, error) {
-	n := i.Int32
-	if !i.Valid {
-		n = 0
-	}
-	return []byte(strconv.FormatInt(int64(n), 10)), nil
-}
+func (i Int32) MarshalText() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // SetValid changes this Int32's value and also sets it to be non-null.
-func (i *Int32) SetValid(n int32) {
-	i.Int32 = n
-	i.Valid = true
-}
+func (i *Int32) SetValid(n int32) { _ = "STUB: not implemented"; return }
 
 // Ptr returns a pointer to this Int32's value, or a nil pointer if this Int32 is null.
-func (i Int32) Ptr() *int32 {
-	if !i.Valid {
-		return nil
-	}
-	return &i.Int32
-}
+func (i Int32) Ptr() *int32 { _ = "STUB: not implemented"; return nil }
 
 // IsZero returns true for null or zero Int32s, for future omitempty support (Go 1.4?)
-func (i Int32) IsZero() bool {
-	return !i.Valid || i.Int32 == 0
-}
+func (i Int32) IsZero() bool { _ = "STUB: not implemented"; return false }
 
 // Equal returns true if both ints have the same value or are both either null or zero.
-func (i Int32) Equal(other Int32) bool {
-	return i.ValueOrZero() == other.ValueOrZero()
-}
+func (i Int32) Equal(other Int32) bool { _ = "STUB: not implemented"; return false }
 
-func (i Int32) value() (int64, bool) {
-	return int64(i.Int32), i.Valid
-}
+func (i Int32) value() (int64, bool) { _ = "STUB: not implemented"; return 0, false }
